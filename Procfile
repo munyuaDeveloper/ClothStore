@@ -1,1 +1,1 @@
-web: gunicorn ClothStore.wsgi --log-file -
+web: gunicorn clothStore.wsgi --log-file -
