@@ -22,3 +22,15 @@ class ContactPageView(TemplateView):
 
 class BasketPageView(TemplateView):
     template_name = 'basket.html'
+
+
+class CheckoutPageView(TemplateView):
+    template_name = 'checkout1.html'
+
+
+class ItemDetailsPageView(TemplateView):
+    template_name = 'detail.html'
+
+
+class PostDetailsPageView(TemplateView):
+    template_name = 'post.html'
