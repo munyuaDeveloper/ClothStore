@@ -3,33 +3,28 @@ from django.views.generic import TemplateView
 
 
 # Create your views here.
+from products.models import Product
+
 
 class HomePageView(TemplateView):
     template_name = 'index.html'
+
+
+def product_list(request):
+    products = Product.objects.filter(available=True)
+    product_count_cat = products.count()
+    context = {
+               'products': products,
+               'product_count_cat': product_count_cat}
+    return render('index.htm', context)
 
 
 class BlogPageView(TemplateView):
     template_name = 'blog.html'
 
 
-class CategoryPageView(TemplateView):
-    template_name = 'category.html'
-
-
 class ContactPageView(TemplateView):
     template_name = 'contact.html'
-
-
-class BasketPageView(TemplateView):
-    template_name = 'basket.html'
-
-
-class CheckoutPageView(TemplateView):
-    template_name = 'checkout1.html'
-
-
-class ItemDetailsPageView(TemplateView):
-    template_name = 'detail.html'
 
 
 class PostDetailsPageView(TemplateView):

@@ -43,8 +43,9 @@
                     <ul class="menu list-inline mb-0">
                         {% if user.is_authenticated %}
                         <li class="list-inline-item"><a href="#"  >My Account</a></li>
+                            <li class="list-inline-item"><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                          <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                          <li class="list-inline-item"><a href="{% url 'login' %}">Login</a></li>
                           <li class="list-inline-item"><a href="{% url 'register' %}">Register</a></li>
                         {% endif %}
 
@@ -54,11 +55,11 @@
                 </div>
             </div>
         </div>
-        <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
-            <div class="modal-dialog modal-sm">
-                {% include 'registration/login.html' %}
-            </div>
-        </div>
+{#        <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">#}
+{#            <div class="modal-dialog modal-sm">#}
+{#                {% include 'registration/login.html' %}#}
+{#            </div>#}
+{#        </div>#}
         <!-- *** TOP BAR END ***-->
 
 
@@ -183,74 +184,6 @@
                             </li>
                         </ul>
                     </li>
-{#                    <li class="nav-item dropdown menu-large">#}
-{#                        <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Template<b class="caret"></b></a>#}
-{#                        <ul class="dropdown-menu megamenu">#}
-{#                            <li>#}
-{#                                <div class="row">#}
-{#                                    <div class="col-md-6 col-lg-3">#}
-{#                                        <h5>Shop</h5>#}
-{#                                        <ul class="list-unstyled mb-3">#}
-{#                                            <li class="nav-item"><a href="index.html" class="nav-link">Homepage</a></li>#}
-{#                                            <li class="nav-item"><a href="category.html" class="nav-link">Category -#}
-{#                                                sidebar left</a></li>#}
-{#                                            <li class="nav-item"><a href="category-right.html" class="nav-link">Category#}
-{#                                                - sidebar right</a></li>#}
-{#                                            <li class="nav-item"><a href="category-full.html" class="nav-link">Category#}
-{#                                                - full width</a></li>#}
-{#                                            <li class="nav-item"><a href="detail.html" class="nav-link">Product#}
-{#                                                detail</a></li>#}
-{#                                        </ul>#}
-{#                                    </div>#}
-{#                                    <div class="col-md-6 col-lg-3">#}
-{#                                        <h5>User</h5>#}
-{#                                        <ul class="list-unstyled mb-3">#}
-{#                                            <li class="nav-item"><a href="register.html" class="nav-link">Register /#}
-{#                                                login</a></li>#}
-{#                                            <li class="nav-item"><a href="customer-orders.html" class="nav-link">Orders#}
-{#                                                history</a></li>#}
-{#                                            <li class="nav-item"><a href="customer-order.html" class="nav-link">Order#}
-{#                                                history detail</a></li>#}
-{#                                            <li class="nav-item"><a href="customer-wishlist.html" class="nav-link">Wishlist</a>#}
-{#                                            </li>#}
-{#                                            <li class="nav-item"><a href="customer-account.html" class="nav-link">Customer#}
-{#                                                account / change password</a></li>#}
-{#                                        </ul>#}
-{#                                    </div>#}
-{#                                    <div class="col-md-6 col-lg-3">#}
-{#                                        <h5>Order process</h5>#}
-{#                                        <ul class="list-unstyled mb-3">#}
-{#                                            <li class="nav-item"><a href="{% url 'basket' %}" class="nav-link">Shopping#}
-{#                                                cart</a></li>#}
-{#                                            <li class="nav-item"><a href="checkout1.html" class="nav-link">Checkout -#}
-{#                                                step 1</a></li>#}
-{#                                            <li class="nav-item"><a href="checkout2.html" class="nav-link">Checkout -#}
-{#                                                step 2</a></li>#}
-{#                                            <li class="nav-item"><a href="checkout3.html" class="nav-link">Checkout -#}
-{#                                                step 3</a></li>#}
-{#                                            <li class="nav-item"><a href="checkout4.html" class="nav-link">Checkout -#}
-{#                                                step 4</a></li>#}
-{#                                        </ul>#}
-{#                                    </div>#}
-{#                                    <div class="col-md-6 col-lg-3">#}
-{#                                        <h5>Pages and blog</h5>#}
-{#                                        <ul class="list-unstyled mb-3">#}
-{#                                            <li class="nav-item"><a href="blog.html" class="nav-link">Blog listing</a>#}
-{#                                            </li>#}
-{#                                            <li class="nav-item"><a href="post.html" class="nav-link">Blog Post</a></li>#}
-{#                                            <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>#}
-{#                                            <li class="nav-item"><a href="text.html" class="nav-link">Text page</a></li>#}
-{#                                            <li class="nav-item"><a href="text-right.html" class="nav-link">Text page -#}
-{#                                                right sidebar</a></li>#}
-{#                                            <li class="nav-item"><a href="404.html" class="nav-link">404 page</a></li>#}
-{#                                            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>#}
-{#                                            </li>#}
-{#                                        </ul>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </li>#}
-{#                        </ul>#}
-{#                    </li>#}
                 </ul>
                 <div class="navbar-buttons d-flex justify-content-end">
                     <!-- /.nav-collapse-->

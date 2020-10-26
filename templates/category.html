@@ -26,33 +26,36 @@
                             </div>
                             <div class="card-body">
                                 <ul class="nav nav-pills flex-column category-menu">
-                                    <li><a href="{% url 'category' %}" class="nav-link">Men <span
-                                            class="badge badge-secondary">42</span></a>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{% url 'category' %}" class="nav-link">T-shirts</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Shirts</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Pants</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Accessories</a></li>
-                                        </ul>
+                                    <li>
+                                        <a class="nav-link {% if not category %} active {% endif %}"
+                                           href="{% url "category" %}">All
+                                            {% if not category %}
+                                                <span class="badge badge-light">{{ product_count_cat }}</span>
+                                            {% endif %}
+                                        </a>
                                     </li>
-                                    <li><a href="{% url 'category' %}" class="nav-link active">Ladies <span
-                                            class="badge badge-light">123</span></a>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{% url 'category' %}" class="nav-link">T-shirts</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Skirts</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Pants</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{% url 'category' %}" class="nav-link">Kids <span
-                                            class="badge badge-secondary">11</span></a>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{% url 'category' %}" class="nav-link">T-shirts</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Skirts</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Pants</a></li>
-                                            <li><a href="{% url 'category' %}" class="nav-link">Accessories</a></li>
-                                        </ul>
-                                    </li>
+                                    {% for cat in categories %}
+                                        <li>
+                                            <a href="{{ cat.get_absolute_url }}"
+                                               class="nav-link {% if category.slug == cat.slug %} active
+                                                {% endif %}"> {{ cat.name }}
+                                                {% if category.slug == cat.slug %}
+                                                    <span class="badge badge-light">{{ product_count_cat }}</span>
+                                                {% endif %}
+
+                                            </a>
+                                            <ul class="list-unstyled">
+                                                {% for sub_cat in cat.sub_category.all %}
+                                                    <li>
+                                                        <a href="{% url 'product_list_by_category_and_subcategory' cat.slug sub_cat.slug %}"
+                                                           class="nav-link {% if subcategory.slug == sub_cat.slug and category.slug == cat.slug %} text-primary{% endif %}">{{ sub_cat.name }}
+                                                            <span class="text-right">{% if subcategory.slug == sub_cat.slug and category.slug == cat.slug %}
+                                                                {{ products.count }}{% endif %}</span></a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -138,7 +141,7 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="box">
-                            <h1>Ladies</h1>
+                            <h1>{% if category %}{{ category.name }}{% else %} Products {% endif %}</h1>
                             <p>In our Ladies department we offer wide selection of the best products we have found and
                                 carefully selected worldwide.</p>
                         </div>
@@ -166,189 +169,59 @@
                             </div>
                         </div>
                         <div class="row products">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img src="{% static 'img/product1.jpg' %}" alt=""
-                                                                                          class="img-fluid"></a></div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img src="{% static 'img/product1_2.jpg' %}" alt=""
-                                                                                         class="img-fluid"></a></div>
+                            {% for product in products %}
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product">
+                                        <div class="flip-container">
+                                            <div class="flipper">
+                                                <div class="front"><a href="{{ product.get_absolute_url }}">
+                                                    <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/no-product-img.png' %} {% endif %}"
+                                                         alt="" class="img-fluid"></a>
+                                                </div>
+                                                <div class="back">
+                                                    <a href="{{ product.get_absolute_url }}">
+                                                        <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/no-product-img.png' %} {% endif %}"
+                                                             alt="" class="img-fluid">
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img src="{% static 'img/product1.jpg' %}" alt=""
-                                                                                 class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="{% url 'item-details' %}">Fur coat with very but very very long name</a></h3>
-                                        <p class="price">
-                                            <del></del>
-                                            $143.00
-                                        </p>
-                                        <p class="buttons"><a href="{% url 'item-details' %}" class="btn btn-outline-secondary">View
-                                            detail</a><a href="{% url 'basket' %}" class="btn btn-primary"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    <!-- /.text-->
-                                </div>
-                                <!-- /.product            -->
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img src="{% static 'img/product2.jpg' %}" alt=""
-                                                                                          class="img-fluid"></a></div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img src="{% static 'img/product2_2.jpg' %}" alt=""
-                                                                                         class="img-fluid"></a></div>
+                                        <a href="{{ product.get_absolute_url }}" class="invisible">
+                                            <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/no-product-img.png' %} {% endif %}"
+                                                 alt="" class="img-fluid">
+                                        </a>
+                                        <div class="text">
+                                            <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+                                            <p class="price">
+                                                <del></del>
+                                                Ksh: {{ product.price }}
+                                            </p>
+                                            <div class="row mb-3">
+                                                <div class="col-sm-6">
+                                                    <a href="{{ product.get_absolute_url }}"
+                                                       class="btn btn-outline-secondary">View
+                                                        detail</a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                                        {{ cart_product_form }}
+                                                        {% csrf_token %}
+                                                        <input type="submit" class="btn btn-primary"
+                                                               value="Add to cart">
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <!-- /.text-->
                                     </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img src="{% static '' %}img/product2.jpg" alt=""
-                                                                                 class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="{% url 'item-details' %}">White Blouse Armani</a></h3>
-                                        <p class="price">
-                                            <del>$280</del>
-                                            $143.00
-                                        </p>
-                                        <p class="buttons"><a href="{% url 'item-details' %}" class="btn btn-outline-secondary">View
-                                            detail</a><a href="{% url 'basket' %}" class="btn btn-primary"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    <!-- /.text-->
-                                    <div class="ribbon sale">
-                                        <div class="theribbon">SALE</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                    <!-- /.ribbon-->
-                                    <div class="ribbon new">
-                                        <div class="theribbon">NEW</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                    <!-- /.ribbon-->
-                                    <div class="ribbon gift">
-                                        <div class="theribbon">GIFT</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                    <!-- /.ribbon-->
+                                    <!-- /.product            -->
                                 </div>
-                                <!-- /.product            -->
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img src="{% static 'img/product3.jpg' %}" alt=""
-                                                                                          class="img-fluid"></a></div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img src="{% static 'img/product3_2.jpg' %}" alt=""
-                                                                                         class="img-fluid"></a></div>
-                                        </div>
-                                    </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img src="{% static '' %}img/product3.jpg" alt=""
-                                                                                 class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="{% url 'item-details' %}">Black Blouse Versace</a></h3>
-                                        <p class="price">
-                                            <del></del>
-                                            $143.00
-                                        </p>
-                                        <p class="buttons"><a href="{% url 'item-details' %}" class="btn btn-outline-secondary">View
-                                            detail</a><a href="{% url 'basket' %}" class="btn btn-primary"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    <!-- /.text-->
-                                </div>
-                                <!-- /.product            -->
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img src="{% static 'img/product3.jpg' %}" alt=""
-                                                                                          class="img-fluid"></a></div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img src="{% static 'img/product3_2.jpg' %}" alt=""
-                                                                                         class="img-fluid"></a></div>
-                                        </div>
-                                    </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img src="{% static 'img/product3.jpg' %}" alt=""
-                                                                                 class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="{% url 'item-details' %}">Black Blouse Versace</a></h3>
-                                        <p class="price">
-                                            <del></del>
-                                            $143.00
-                                        </p>
-                                        <p class="buttons"><a href="{% url 'item-details' %}" class="btn btn-outline-secondary">View
-                                            detail</a><a href="{% url 'basket' %}" class="btn btn-primary"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    <!-- /.text-->
-                                </div>
-                                <!-- /.product            -->
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img src="{% static 'img/product2.jpg' %}" alt=""
-                                                                                          class="img-fluid"></a></div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img src="{% static 'img/product2_2.jpg' %}" alt=""
-                                                                                         class="img-fluid"></a></div>
-                                        </div>
-                                    </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img src="{% static 'img/product2.jpg' %}" alt=""
-                                                                                 class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="{% url 'item-details' %}">White Blouse Versace</a></h3>
-                                        <p class="price">
-                                            <del></del>
-                                            $143.00
-                                        </p>
-                                        <p class="buttons"><a href="{% url 'item-details' %}" class="btn btn-outline-secondary">View
-                                            detail</a><a href="{% url 'basket' %}" class="btn btn-primary"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    <!-- /.text-->
-                                    <div class="ribbon new">
-                                        <div class="theribbon">NEW</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                    <!-- /.ribbon-->
-                                </div>
-                                <!-- /.product            -->
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img src="{% static 'img/product1.jpg' %}" alt=""
-                                                                                          class="img-fluid"></a></div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img src="{% static 'img/product1_2.jpg' %}" alt=""
-                                                                                         class="img-fluid"></a></div>
-                                        </div>
-                                    </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img src="{% static 'img/product1.jpg' %}" alt=""
-                                                                                 class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="{% url 'item-details' %}">Fur coat</a></h3>
-                                        <p class="price">
-                                            <del></del>
-                                            $143.00
-                                        </p>
-                                        <p class="buttons"><a href="{% url 'item-details' %}" class="btn btn-outline-secondary">View
-                                            detail</a><a href="{% url 'basket' %}" class="btn btn-primary"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    <!-- /.text-->
-                                    <div class="ribbon gift">
-                                        <div class="theribbon">GIFT</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                    <!-- /.ribbon-->
-                                </div>
-                                <!-- /.product            -->
-                            </div>
+                            {% endfor %}
                             <!-- /.products-->
                         </div>
+                        {% if not products %}
+                            <p class="text-primary text-center">There no product in this category yet!</p>
+                        {% endif %}
                         <div class="pages">
                             <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i
                                     class="fa fa-chevron-down"></i> Load more</a></p>

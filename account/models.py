@@ -4,4 +4,5 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    age = models.PositiveIntegerField(null=True, blank=True)
+    phone = models.PositiveIntegerField(null=True, blank=False)
+    address = models.CharField(max_length=50, null=True, blank=False)
