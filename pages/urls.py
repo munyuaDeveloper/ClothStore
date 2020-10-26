@@ -9,7 +9,7 @@ from pages.views import (
 )
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name='home'),
+    path('', HomePageView, name='home'),
     path('blog', BlogPageView.as_view(), name='blog'),
     path('contact', ContactPageView.as_view(), name='contact'),
     path('post-details', PostDetailsPageView.as_view(), name='post-details'),

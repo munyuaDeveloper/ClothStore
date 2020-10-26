@@ -9,7 +9,7 @@ class CategoryPageView(ListView):
     template_name = 'category.html'
 
 
-def product_list(request, category_slug=None, subcategory_slug=None,):
+def product_list(request, category_slug=None, subcategory_slug=None, ):
     category = None
     subcategory = None
     product_count_cat = 0
@@ -40,10 +40,16 @@ def product_detail(request, id, slug):
                                 slug=slug,
                                 available=True)
     cart_product_form = CartAddProductForm()
+    similar_products = Product.objects.filter(category=product.category)
+    product_count_cat = Product.objects.filter(category=product.category).count()
+    categories = Category.objects.all()
     return render(request,
                   'detail.html',
                   {'product': product,
-                   'cart_product_form': cart_product_form})
+                   'cart_product_form': cart_product_form,
+                   'similar_products': similar_products,
+                   'categories': categories,
+                   'product_count_cat': product_count_cat})
 
 
 class BasketPageView(TemplateView):
