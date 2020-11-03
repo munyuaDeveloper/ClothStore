@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
     <div id="all">
         <div id="content">
@@ -46,7 +47,7 @@
                                                 {% for sub_cat in cat.sub_category.all %}
                                                     <li>
                                                         <a href="{% url 'product_list_by_category_and_subcategory' cat.slug sub_cat.slug %}"
-                                                           class="nav-link {% if sub_cat.slug == product.subcategory.slug  and cat.slug == product.category.slug  %} text-primary{% endif %}">{{ sub_cat.name }}
+                                                           class="nav-link {% if sub_cat.slug == product.subcategory.slug  and cat.slug == product.category.slug %} text-primary{% endif %}">{{ sub_cat.name }}
                                                             <span class="text-right">{% if subcategory.slug == sub_cat.slug and category.slug == cat.slug %}
                                                                 {{ products.count }}{% endif %}</span></a>
                                                     </li>
@@ -168,20 +169,17 @@
                                     <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product
                                         details, material &amp; care and sizing</a></p>
                                     <p class="price">Ksh: {{ product.price }}</p>
-                                    <div class="row mb-3">
-                                        <div class="col-">
-                                            <a href="basket.html" class="btn btn-outline-primary"><i
-                                                    class="fa fa-heart"></i> Add to wishlist</a></p>
+                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                               {{ cart_product_form|crispy}}
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="submit" class="btn btn-primary mt-4" value="Add to cart">
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <form action="{% url "cart:cart_add" product.id %}" method="post">
-                                                {#                                                        {{ cart_product_form }}#}
-                                                {% csrf_token %}
-                                                <input type="submit" class="btn btn-primary"
-                                                       value="Add to cart">
-                                            </form>
-                                        </div>
-                                    </div>
+                                        {% csrf_token %}
+                                    </form>
                                 </div>
                                 <div data-slider-id="1" class="owl-thumbs">
                                     <button class="owl-thumb-item">
