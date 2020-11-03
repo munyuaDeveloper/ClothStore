@@ -40,7 +40,7 @@
                                                             {% else %}{% static "img/no-product-img.png" %}{% endif %}">
                                                     </a>
                                                 </td>
-                                                <td><a href="#">{{ product.name }}</a></td>
+                                                <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
                                                 <td>
                                                     <input type="number" value="{{ item.quantity }}"
                                                            class="form-control">

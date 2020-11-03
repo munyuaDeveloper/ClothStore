@@ -16,6 +16,7 @@ def product_list(request, category_slug=None, subcategory_slug=None, ):
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
     product_count_cat = products.count()
+    cart_product_form = CartAddProductForm()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -27,6 +28,7 @@ def product_list(request, category_slug=None, subcategory_slug=None, ):
                'categories': categories,
                'subcategory': subcategory,
                'products': products,
+               'cart_product_form': cart_product_form,
                'product_count_cat': product_count_cat}
     return render(request,
                   'category.html',
