@@ -83,7 +83,10 @@
                             {{ total_items }}
                         </a>
                     {% else %}
-                        0
+                     <a href="{% url "cart:cart_detail" %}" class="btn btn-outline-secondary navbar-toggler">
+                            <i class="fa fa-shopping-cart"></i>
+                            {{ total_items }}
+                        </a>
                     {% endif %}
                 {% endwith %}
 
@@ -250,7 +253,10 @@
                                     Ksh:{{ cart.get_total_price }}
                                 </a>
                             {% else %}
+                                <a href="{% url "cart:cart_detail" %}" class="btn btn-primary navbar-btn">
+                                    <i class="fa fa-shopping-cart"></i>
                                 Your cart is empty.
+                                </a>
                             {% endif %}
                         {% endwith %}
                     </div>
