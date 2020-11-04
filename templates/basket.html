@@ -9,7 +9,7 @@
                         <!-- breadcrumb-->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
                                 <li aria-current="page" class="breadcrumb-item active">Shopping cart</li>
                             </ol>
                         </nav>
@@ -18,14 +18,22 @@
                         <div class="box">
 
                             <h1>Shopping cart</h1>
-                            <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                            <p class="text-muted">
+                                {% with total_items=cart|length %}
+                                    {% if total_items > 0 %}
+                                        You currently have {{total_items}} item(s) in your cart.
+                                    {% else %}
+                                          You currently have 0 item(s) in your cart.
+                                    {% endif %}
+                                {% endwith %}
+                            </p>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th colspan="2">Product</th>
                                         <th>Quantity</th>
-                                        <th>Unit price</th>
+                                        <th>Unit price(Ksh)</th>
                                         <th>Discount</th>
                                         <th colspan="2">Total</th>
                                     </tr>
@@ -46,7 +54,7 @@
                                                            class="form-control">
                                                 </td>
                                                 <td>{{ item.price }}</td>
-                                                <td>$0.00</td>
+                                                <td>0.00</td>
                                                 <td>{{ item.total_price }}</td>
                                                 <td>
                                                     <form action="{% url "cart:cart_remove" product.id %}"
@@ -63,7 +71,7 @@
                                     <tfoot>
                                     <tr>
                                         <th colspan="5">Total</th>
-                                        <th colspan="2">Ksh:{{ cart.get_total_price }}</th>
+                                        <th colspan="2">Ksh,{{ cart.get_total_price }}</th>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -73,9 +81,7 @@
                                 <div class="left"><a href="{% url 'category' %}" class="btn btn-outline-secondary"><i
                                         class="fa fa-chevron-left"></i> Continue shopping</a></div>
                                 <div class="right">
-                                    <button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update
-                                        cart
-                                    </button>
+                                    {#                                    <button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update cart</button>#}
                                     <button type="submit" class="btn btn-primary">Proceed to checkout <i
                                             class="fa fa-chevron-right"></i></button>
                                 </div>
@@ -92,15 +98,15 @@
                                 <div class="product same-height">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img
+                                            <div class="front"><a href="#"><img
                                                     src="{% static 'img/product2.jpg' %}" alt="" class="img-fluid"></a>
                                             </div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img
+                                            <div class="back"><a href="#"><img
                                                     src="{% static 'img/product2_2.jpg' %}" alt=""
                                                     class="img-fluid"></a></div>
                                         </div>
                                     </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img
+                                    <a href="#" class="invisible"><img
                                             src="{% static 'img/product2.jpg' %}" alt="" class="img-fluid"></a>
                                     <div class="text">
                                         <h3>Fur coat</h3>
@@ -113,15 +119,15 @@
                                 <div class="product same-height">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img
+                                            <div class="front"><a href="#"><img
                                                     src="{% static 'img/product1.jpg' %}" alt="" class="img-fluid"></a>
                                             </div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img
+                                            <div class="back"><a href="#"><img
                                                     src="{% static 'img/product1_2.jpg' %}" alt=""
                                                     class="img-fluid"></a></div>
                                         </div>
                                     </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img
+                                    <a href="#" class="invisible"><img
                                             src="{% static 'img/product1.jpg' %}" alt="" class="img-fluid"></a>
                                     <div class="text">
                                         <h3>Fur coat</h3>
@@ -134,15 +140,15 @@
                                 <div class="product same-height">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front"><a href="{% url 'item-details' %}"><img
+                                            <div class="front"><a href="#"><img
                                                     src="{% static 'img/product3.jpg' %}" alt="" class="img-fluid"></a>
                                             </div>
-                                            <div class="back"><a href="{% url 'item-details' %}"><img
+                                            <div class="back"><a href="#"><img
                                                     src="{% static 'img/product3_2.jpg' %}" alt=""
                                                     class="img-fluid"></a></div>
                                         </div>
                                     </div>
-                                    <a href="{% url 'item-details' %}" class="invisible"><img
+                                    <a href="#" class="invisible"><img
                                             src="{% static 'img/product3.jpg' %}" alt="" class="img-fluid"></a>
                                     <div class="text">
                                         <h3>Fur coat</h3>

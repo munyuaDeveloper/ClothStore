@@ -42,11 +42,11 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <ul class="menu list-inline mb-0">
                         {% if user.is_authenticated %}
-                        <li class="list-inline-item"><a href="#"  >My Account</a></li>
+                            <li class="list-inline-item"><a href="#">My Account</a></li>
                             <li class="list-inline-item"><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                          <li class="list-inline-item"><a href="{% url 'login' %}">Login</a></li>
-                          <li class="list-inline-item"><a href="{% url 'register' %}">Register</a></li>
+                            <li class="list-inline-item"><a href="{% url 'login' %}">Login</a></li>
+                            <li class="list-inline-item"><a href="{% url 'register' %}">Register</a></li>
                         {% endif %}
 
                         <li class="list-inline-item"><a href="{% url 'contact' %}">Contact</a></li>
@@ -55,11 +55,11 @@
                 </div>
             </div>
         </div>
-{#        <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">#}
-{#            <div class="modal-dialog modal-sm">#}
-{#                {% include 'registration/login.html' %}#}
-{#            </div>#}
-{#        </div>#}
+        {#        <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">#}
+        {#            <div class="modal-dialog modal-sm">#}
+        {#                {% include 'registration/login.html' %}#}
+        {#            </div>#}
+        {#        </div>#}
         <!-- *** TOP BAR END ***-->
 
 
@@ -67,7 +67,8 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container"><a href="{% url 'home' %}" class="navbar-brand home">
             <img src="{% static 'img/logo.png' %}" alt="Munyua Collection logo" class="d-none d-md-inline-block">
-            <img src="{% static 'img/logo-small.png' %}" alt="Munyua Collection logo" class="d-inline-block d-md-none"><span class="sr-only">Munyua Collection - go to homepage</span></a>
+            <img src="{% static 'img/logo-small.png' %}" alt="Munyua Collection logo"
+                 class="d-inline-block d-md-none"><span class="sr-only">Munyua Collection - go to homepage</span></a>
             <div class="navbar-buttons">
                 <button type="button" data-toggle="collapse" data-target="#navigation"
                         class="btn btn-outline-secondary navbar-toggler"><span
@@ -75,58 +76,88 @@
                 <button type="button" data-toggle="collapse" data-target="#search"
                         class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i
                         class="fa fa-search"></i></button>
-                <a href="{% url 'basket' %}" class="btn btn-outline-secondary navbar-toggler"><i
-                        class="fa fa-shopping-cart"></i></a>
+                {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                        <a href="{% url "cart:cart_detail" %}" class="btn btn-outline-secondary navbar-toggler">
+                            <i class="fa fa-shopping-cart"></i>
+                            {{ total_items }}
+                        </a>
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endwith %}
+
             </div>
             <div id="navigation" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="{% url 'home' %}" class="nav-link active">Home</a></li>
                     <li class="nav-item dropdown menu-large">
-                        <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Men<b class="caret"></b></a>
+                        <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200"
+                           class="dropdown-toggle nav-link">Men<b class="caret"></b></a>
                         <ul class="dropdown-menu megamenu">
                             <li>
                                 <div class="row">
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Clothing</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">T-shirts</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Shirts</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Pants</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Accessories</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">T-shirts</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Shirts</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Pants</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Accessories</a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Shoes</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Casual</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Casual</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Accessories</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Casual</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Casual</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Casual</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Casual</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Featured</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
                                         </ul>
                                         <h5>Looks and trends</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -134,48 +165,67 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown menu-large">
-                        <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
+                        <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200"
+                           class="dropdown-toggle nav-link">Ladies<b class="caret"></b></a>
                         <ul class="dropdown-menu megamenu">
                             <li>
                                 <div class="row">
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Clothing</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">T-shirts</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Shirts</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Pants</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Accessories</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">T-shirts</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Shirts</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Pants</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Accessories</a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Shoes</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Casual</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Casual</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <h5>Accessories</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Casual</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Casual</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Casual</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Casual</a></li>
                                         </ul>
                                         <h5>Looks and trends</h5>
                                         <ul class="list-unstyled mb-3">
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Sandals</a></li>
-                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking shoes</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Trainers</a>
+                                            </li>
+                                            <li class="nav-item"><a href="{% url 'category' %}"
+                                                                    class="nav-link">Sandals</a></li>
+                                            <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Hiking
+                                                shoes</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="banner"><a href="#">
-                                            <img src="{% static 'img/banner.jpg' %}" alt="" class="img img-fluid"></a></div>
+                                            <img src="{% static 'img/banner.jpg' %}" alt="" class="img img-fluid"></a>
+                                        </div>
                                         <div class="banner"><a href="#">
                                             <img src="{% static 'img/banner2.jpg' %}" alt="" class="img img-fluid"></a>
                                         </div>
@@ -191,9 +241,19 @@
                     <a data-toggle="collapse" href="#search"
                        class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span
                             class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
-                    <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="{% url 'cart:cart_detail' %}"
-                                                                                                    class="btn btn-primary navbar-btn"><i
-                            class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
+                    <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block">
+                        {% with total_items=cart|length %}
+                            {% if total_items > 0 %}
+                                <a href="{% url "cart:cart_detail" %}" class="btn btn-primary navbar-btn">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    {{ total_items }} item{{ total_items|pluralize }},
+                                    Ksh:{{ cart.get_total_price }}
+                                </a>
+                            {% else %}
+                                Your cart is empty.
+                            {% endif %}
+                        {% endwith %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -257,7 +317,9 @@ _________________________________________________________
             <!-- /.col-lg-3-->
             <div class="col-lg-3 col-md-6">
                 <h4 class="mb-3">Where to find us</h4>
-                <p><strong>Munyua Collection Ltd.</strong><br>Moi Avenue<br>Near Archives<br>Nairobi<br><strong>Kenya</strong></p><a href="{% url 'contact' %}">Go to contact page</a>
+                <p><strong>Munyua Collection Ltd.</strong><br>Moi Avenue<br>Near
+                    Archives<br>Nairobi<br><strong>Kenya</strong></p><a href="{% url 'contact' %}">Go to contact
+                page</a>
                 <hr class="d-block d-md-none">
             </div>
             <!-- /.col-lg-3-->
@@ -302,7 +364,8 @@ _________________________________________________________
                 <p class="text-center text-lg-left">©2019 Your name goes here.</p>
             </div>
             <div class="col-lg-6">
-                <p class="text-center text-lg-right">Developed by <a href="http://munyua.pythonanywhere.com/" target="_blank">Peter
+                <p class="text-center text-lg-right">Developed by <a href="http://munyua.pythonanywhere.com/"
+                                                                     target="_blank">Peter
                     Munyua</a>
                 </p>
             </div>

@@ -10,10 +10,10 @@
                         <!-- breadcrumb-->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Ladies</a></li>
-                                <li class="breadcrumb-item"><a href="#">Tops</a></li>
-                                <li aria-current="page" class="breadcrumb-item active">White Blouse Armani</li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'product_list_by_category' product.category.slug %}">{{product.category}}</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'product_list_by_category_and_subcategory' product.category.slug product.subcategory.slug  %}">{{product.subcategory}}</a></li>
+                                <li aria-current="page" class="breadcrumb-item active">{{product.name|truncatechars:30}}</li>
                             </ol>
                         </nav>
                     </div>
