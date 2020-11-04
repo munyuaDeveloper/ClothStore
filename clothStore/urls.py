@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -9,6 +8,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('shop/', include('products.urls')),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
     path('account/', include('account.urls')),
     path('account/', include('django.contrib.auth.urls')),
 ]
