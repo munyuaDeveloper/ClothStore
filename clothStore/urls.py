@@ -11,6 +11,8 @@ urlpatterns = [
     path('orders/', include('orders.urls', namespace='orders')),
     path('account/', include('account.urls')),
     path('account/', include('django.contrib.auth.urls')),
+    path('blog/', include('posts.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

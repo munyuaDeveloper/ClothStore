@@ -14,13 +14,5 @@ def HomePageView(request):
     return render(request, 'index.html', context)
 
 
-class BlogPageView(TemplateView):
-    template_name = 'blog.html'
-
-
 class ContactPageView(TemplateView):
     template_name = 'contact.html'
-
-
-class PostDetailsPageView(TemplateView):
-    template_name = 'post.html'

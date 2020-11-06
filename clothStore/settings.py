@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
+    'posts',
+    'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
 ]
 
@@ -125,6 +128,37 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+CKEDITOR_UPLOAD_PATH = 'uploads'
+CKEDITOR_CONFIGS = {
+    'default':
+        {'toolbar': 'Custom', 'height': 500, 'toolbar_Custom':
+            [
+                ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo',
+                 'Redo'],
+                ['Link', 'Unlink', 'Anchor'],
+                ['Image', 'Flash', 'Table', 'HorizontalRule'],
+                ['TextColor', 'BGColor'],
+                ['Smiley', 'SpecialChar'],
+                ['Source'],
+            ],
+         }, 'special':
+        {'toolbar': 'Special', 'toolbar_Special':
+            [
+                ['Bold'],
+            ],
+         },
+    'special': {
+        'toolbar': 'Special',
+        'toolbar_Special':
+            [
+                ['Bold'],
+                ['CodeSnippet', 'Youtube'],
+            ], 'extraPlugins': ','.join(['codesnippet',
+                                         'youtube']), }
+}
+
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

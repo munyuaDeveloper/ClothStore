@@ -1016,129 +1016,142 @@ h1 {
   height: 400px;
 }
 
-#content #blog-listing .post, #content #blog-homepage .post {
-  margin-bottom: 15px;
-  background: #fff;
-  margin: 0 0 30px;
-  border: solid 1px #e6e6e6;
-  padding: 20px;
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+/*
+* ==========================================================
+*     LATEST SECTION
+* ==========================================================
+*/
+section.latest-posts header {
+  margin-bottom: 50px;
 }
 
-#content #blog-listing .post h2 a, #content #blog-listing .post h4 a, #content #blog-homepage .post h2 a, #content #blog-homepage .post h4 a {
+.post-meta {
+  margin: 10px 0;
+  font-size: 0.8em;
+}
+
+.post-meta .date {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.post-meta .date::after {
+  display: none;
+}
+
+.post p:not(.lead) {
+  font-weight: 400;
+  color: #777;
+  font-size: 0.95em;
+}
+
+.post a {
+  text-decoration: none;
+}
+
+.post a:hover, .post a:focus {
+  text-decoration: none;
+}
+
+.post h3 {
+  line-height: 1.1em;
+  color: #222;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-bottom: 1rem;
+}
+
+.post h3:hover {
   color: #555;
 }
 
-#content #blog-listing .post h2 a:hover, #content #blog-listing .post h4 a:hover, #content #blog-homepage .post h2 a:hover, #content #blog-homepage .post h4 a:hover {
-  color: #429244;
-}
-
-#content #blog-listing .post .author-category, #content #blog-homepage .post .author-category {
-  color: #999;
-  font-weight: 300;
-}
-
-#content #blog-listing .post .date-comments a, #content #blog-homepage .post .date-comments a {
-  color: #999;
-  margin-right: 20px;
-}
-
-#content #blog-listing .post .date-comments a:hover, #content #blog-homepage .post .date-comments a:hover {
-  color: #429244;
-}
-
-#content #blog-listing .post .intro, #content #blog-homepage .post .intro {
-  text-align: left;
-}
-
-#content #blog-listing .post .image, #content #blog-homepage .post .image {
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-#content #blog-listing .post .image img, #content #blog-homepage .post .image img {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-}
-
-#content #blog-listing .post .read-more, #content #blog-homepage .post .read-more {
-  text-align: right;
-}
-
-#content #blog-listing .post:hover .image img, #content #blog-homepage .post:hover .image img {
-  -webkit-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
-
-#content #blog-listing .pager, #content #blog-homepage .pager {
-  margin: 20px 0;
-}
-
-#content #blog-listing .pager a, #content #blog-homepage .pager a {
-  border-radius: 30px !important;
-  background: #fff;
+.post .category a {
+  color: #33b35a;
+  letter-spacing: 0.05em;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-decoration: none;
 }
 
-#content #blog-listing .pager a:not(.disabled):hover, #content #blog-homepage .pager a:not(.disabled):hover {
-  background: #429244;
+.post .date {
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #aaa;
 }
 
-#content #blog-homepage .post {
-  margin-bottom: 30px;
+.post .avatar {
+  max-width: 40px;
+  min-width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-#content #blog-homepage .post h2, #content #blog-homepage .post h4, #content #blog-homepage .post .author-category, #content #blog-homepage .post .read-more {
-  text-align: center;
-}
-
-#content #blog-homepage .post .intro {
-  font-weight: 300;
-}
-
-#content #blog-homepage .post .read-more {
-  margin-top: 20px;
-}
-
-#content #blog-post .author-date {
+.post .title,
+.post .date,
+.post .comments,
+.post .views {
+  font-weight: 400;
   color: #999;
-  font-weight: 300;
+  text-transform: capitalize;
 }
 
-#content #blog-post #post-content {
-  margin-bottom: 20px;
+.post .title i,
+.post .date i,
+.post .comments i,
+.post .views i {
+  margin-right: 5px;
+  font-size: 1.1em;
 }
 
-#content #blog-post .comment {
-  clear: both;
-  margin-bottom: 25px;
+.post .title::after,
+.post .date::after,
+.post .comments::after,
+.post .views::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 7px;
+  font-size: 0.9em;
+  color: #ccc;
 }
 
-#content #blog-post .comment .posted {
-  color: #999;
-  font-size: 0.738rem;
+.post .post-tags {
+  margin-top: 30px;
 }
 
-#content #blog-post .comment .reply {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
+.post .post-tags .tag {
+  padding: 5px 25px;
+  border: 1px solid #ddd;
+  margin: 5px;
+  color: #777;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
 }
 
-#content #blog-post .comment.last {
-  margin-bottom: 0;
+.post .post-tags .tag:hover {
+  background: #33b35a;
+  color: #fff;
+  border-color: #33b35a;
 }
 
-#content #blog-post #comments, #content #blog-post #comment-form {
-  clear: both;
+.post .meta-last::after {
+  display: none;
 }
 
-#content #blog-post #comments h4, #content #blog-post #comment-form h4 {
-  margin-bottom: 20px;
-}
-
-#content #blog-post #comment-form {
-  margin-bottom: 20px;
+/* Latest Posts Section Media Query ------------------------------------- */
+@media (max-width: 767px) {
+  .post {
+    margin-bottom: 40px;
+  }
+  .post:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 #content #customer-orders table tr th, #content #customer-orders table tr td {
