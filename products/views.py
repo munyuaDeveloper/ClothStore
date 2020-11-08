@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView
 from cart.forms import CartAddProductForm
 from products.models import Category, SubCategory, Product
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class CategoryPageView(ListView):
@@ -24,10 +25,22 @@ def product_list(request, category_slug=None, subcategory_slug=None, ):
     if subcategory_slug:
         subcategory = get_object_or_404(SubCategory, slug=subcategory_slug)
         products = products.filter(subcategory=subcategory)
+
+    paginator = Paginator(products, 6)
+    page_request_var = 'page'
+    page = request.GET.get(page_request_var)
+
+    try:
+        paginated_queryset = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_queryset = paginator.page(1)
+    except EmptyPage:
+        paginated_queryset = paginator.page(paginator.num_pages)
     context = {'category': category,
                'categories': categories,
                'subcategory': subcategory,
-               'products': products,
+               'products': paginated_queryset,
+               'page_request_var': page_request_var,
                'cart_product_form': cart_product_form,
                'product_count_cat': product_count_cat}
     return render(request,

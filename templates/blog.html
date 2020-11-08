@@ -41,17 +41,38 @@
                                         class="fa fa-calendar-o"></i> {{ post.timestamp }}</a><a
                                         href=""><i class="fa fa-comment-o"></i> 8 Comments</a></p>
                                 <div class="image"><a href="{% url 'post_details' post.id %}">
-                                    <img src="{{ post.thumbnail.url }}" alt="Example blog post alt" class="img-fluid"></a>
+                                    <img src="{{ post.thumbnail.url }}" alt="Example blog post alt"
+                                         class="img-fluid"></a>
                                 </div>
                                 <p class="intro">{{ post.overview }}</p>
-                                <p class="read-more"><a href="{% url 'post_details' post.id %}" class="btn btn-primary">Continue reading</a></p>
+                                <p class="read-more"><a href="{% url 'post_details' post.id %}" class="btn btn-primary">Continue
+                                    reading</a></p>
                             </div>
                         {% endfor %}
-                        <!-- post        -->
-                        <div class="pager d-flex justify-content-between">
-                            <div class="previous"><a href="#" class="btn btn-outline-primary">← Older</a></div>
-                            <div class="next disabled"><a href="#" class="btn btn-outline-secondary disabled">Newer
-                                → </a></div>
+                        <div class="pages">
+                            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                                <ul class="pagination">
+                                    {% if posts_list.has_previous %}
+                                        <li class="page-item"><a
+                                                href="?{{ page_request_var }}={{ posts_list.previous_page_number }}"
+                                                class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                                    {% endif %}
+                                    {% for i in posts_list.paginator.page_range %}
+                                        {% if posts_list.number == i %}
+                                            <li class="page-item active"><a href="#" class="page-link">{{ i }}</a></li>
+                                        {% else %}
+                                            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if posts_list.has_next %}
+                                        <li class="page-item"><a
+                                                href="?{{ page_request_var }}={{ posts_list.next_page_number }}"
+                                                class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                     <!-- /.col-lg-9-->
