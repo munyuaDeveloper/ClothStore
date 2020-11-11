@@ -21,9 +21,9 @@
                             <p class="text-muted">
                                 {% with total_items=cart|length %}
                                     {% if total_items > 0 %}
-                                        You currently have {{total_items}} item(s) in your cart.
+                                        You currently have {{ total_items }} item(s) in your cart.
                                     {% else %}
-                                          You currently have 0 item(s) in your cart.
+                                        You currently have 0 item(s) in your cart.
                                     {% endif %}
                                 {% endwith %}
                             </p>
@@ -75,6 +75,11 @@
                                     </tr>
                                     </tfoot>
                                 </table>
+                            {% with total_items=cart|length %}
+                                        {% if total_items == 0 %}
+                                             <p class="text-center">You currently have 0 item(s) in your cart.</p>
+                                        {% endif %}
+                                    {% endwith %}
                             </div>
                             <!-- /.table-responsive-->
                             <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">

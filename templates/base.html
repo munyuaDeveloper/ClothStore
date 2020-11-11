@@ -42,7 +42,7 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <ul class="menu list-inline mb-0">
                         {% if user.is_authenticated %}
-                            <li class="list-inline-item"><a href="#">My Account</a></li>
+                            <li class="list-inline-item"><a href="{% url 'my-account' %}">My Account</a></li>
                             <li class="list-inline-item"><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                             <li class="list-inline-item"><a href="{% url 'login' %}">Login</a></li>
@@ -238,6 +238,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a href="{% url 'post_list' %}" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact us</a></li>
                 </ul>
                 <div class="navbar-buttons d-flex justify-content-end">
                     <!-- /.nav-collapse-->
@@ -368,7 +369,7 @@ _________________________________________________________
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-2 mb-lg-0">
-                <p class="text-center text-lg-left">©2019 munyuaClothStore.</p>
+                <p class="text-center text-lg-left">©2020 munyuaClothStore.</p>
             </div>
             <div class="col-lg-6">
                 <p class="text-center text-lg-right">Developed by <a href="http://munyua.pythonanywhere.com/"
