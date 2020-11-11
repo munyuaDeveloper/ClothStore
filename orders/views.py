@@ -8,7 +8,7 @@ from orders.models import OrderItem, Order
 
 def order_create(request):
     cart = Cart(request)
-
+    is_loading = False
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = OrderCreateForm(request.POST)
@@ -24,7 +24,7 @@ def order_create(request):
                                              quantity=item['quantity'])
                 order_items = OrderItem.objects.filter(order=order)
                 # clear the cart
-                # cart.clear()
+                cart.clear()
                 data = {
                     "email": "munyuapeter07@gmail.com",
                     "password": "SwordFish_123"
@@ -46,6 +46,7 @@ def order_create(request):
                 invoke_payment = requests.post('https://uptechpay.com/api/businesspay', headers=headers, data=payload)
 
                 if invoke_payment:
+                    is_loading = False
                     order = Order.objects.get(id=order.pk)
                     order.paid = True
                     order.save()
@@ -56,13 +57,15 @@ def order_create(request):
                 return render(request,
                               'customer-order.html',
                               {'order': order,
-                               'order_items': order_items})
+                               'order_items': order_items,
+                               })
         else:
             form = OrderCreateForm()
             return render(request,
                           'checkout1.html',
                           {
                               'cart': cart,
+                              'is_loading': is_loading,
                               'form': form
                           })
     else:

@@ -50,6 +50,15 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade active show" id="address" role="tabpanel"
                                          aria-labelledby="contact-tab">
+                                        <div class="row">
+                                            <div class="col-6"></div>
+                                            <div class="col">
+                                                {% if is_loading == True %}
+                                                    <div class="spinner-border text-primary text-center"></div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col"></div>
+                                        </div>
                                         <form method="post">
                                             {% csrf_token %}
                                             <div class="content py-3">
@@ -203,6 +212,8 @@
                                                                 <td>
                                                                     <a href="{{ product.get_absolute_url }}">
                                                                         <img src="
+
+
 
 
 
