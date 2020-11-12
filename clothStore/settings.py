@@ -66,6 +66,14 @@ LOGOUT_REDIRECT_URL = 'home'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CART_SESSION_ID = 'cart'
 
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'munyuapeter07@gmail.com'
+EMAIL_HOST_PASSWORD = '0705984772'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

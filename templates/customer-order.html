@@ -40,10 +40,10 @@
                     <div id="customer-order" class="col-lg-9">
                         <div class="box">
                             <h1>Order #{{ order.pk }}  {% if order.paid %}
-                                                    <span class="badge badge-success">Paid</span>
-                                                {% else %}
-                                                    <span class="badge badge-warning">Not paid</span>
-                                                {% endif %}
+                                <span class="badge badge-success">Paid</span>
+                            {% else %}
+                                <span class="badge badge-warning">Not paid</span>
+                            {% endif %}
                             </h1>
                             <p class="lead">Order #{{ order.pk }} was placed on <strong>{{ order.created }}</strong> and
                                 is currently <strong>Being prepared</strong>.</p>
@@ -51,6 +51,9 @@
                                     href="{% url 'contact' %}">contact us</a>, our customer service center is working
                                 for you 24/7.</p>
                             <hr>
+                            {% if email_sent %}
+                                <p class="text-success text-center">Your order details has been sent to your email</p>
+                            {% endif %}
                             <div class="table-responsive mb-4">
                                 <table class="table">
                                     <thead>
