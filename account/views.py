@@ -1,5 +1,4 @@
-from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
@@ -17,9 +16,19 @@ class SignUpView(CreateView):
 
 def MyAccount(request):
     customer_orders = Order.objects.filter(user=request.user)
+    paginator = Paginator(customer_orders, 5)
+    page_request_var = 'page'
+    page = request.GET.get(page_request_var)
 
+    try:
+        paginated_queryset = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_queryset = paginator.page(1)
+    except EmptyPage:
+        paginated_queryset = paginator.page(paginator.num_pages)
     context = {
-        'customer_orders': customer_orders
+        'customer_orders': paginated_queryset,
+        'page_request_var': page_request_var,
     }
     return render(request,
                   'customer-orders.html', context
