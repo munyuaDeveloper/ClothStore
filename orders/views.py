@@ -57,16 +57,16 @@ def order_create(request):
                 #  "amount": int(order.get_total_cost()),
 
                 # Send Email Upon Success order placement
-                subject = f"Regarding an order you placed from MunyuaClothStore (#{order.pk})"
-                message = f"Your order has been received and is being prepared. We will contact you when it's ready for delivery \n\n " \
-                          f"Name: {order.first_name} {order.last_name}\n" \
-                          f"Phone number: {order.phone}\n" \
-                          f"Address: {order.address}\n" \
-                          f"Postal Code: {order.postal_code}\n" \
-                          f"Total Cost: # {order.get_total_cost() + 200}\n"
-
-                send_mail(subject, message, 'munyuapeter07@gmail.com',
-                          [order.email])
+                # subject = f"Regarding an order you placed from MunyuaClothStore (#{order.pk})"
+                # message = f"Your order has been received and is being prepared. We will contact you when it's ready for delivery \n\n " \
+                #           f"Name: {order.first_name} {order.last_name}\n" \
+                #           f"Phone number: {order.phone}\n" \
+                #           f"Address: {order.address}\n" \
+                #           f"Postal Code: {order.postal_code}\n" \
+                #           f"Total Cost: # {order.get_total_cost() + 200}\n"
+                #
+                # send_mail(subject, message, 'munyuapeter07@gmail.com',
+                #           [order.email])
                 sent = True
                 return render(request,
                               'customer-order.html',
