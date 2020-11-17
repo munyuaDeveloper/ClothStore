@@ -1,6 +1,8 @@
 import requests
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import get_object_or_404
 
 from cart.cart import Cart
 from orders.forms import OrderCreateForm
@@ -85,3 +87,11 @@ def order_create(request):
                           })
     else:
         return redirect('login')
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request,
+                  'admin/order_details.html',
+                  {'order': order})
